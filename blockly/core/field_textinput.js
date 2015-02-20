@@ -29,6 +29,7 @@ goog.provide('Blockly.FieldTextInput');
 goog.require('Blockly.Field');
 goog.require('Blockly.Msg');
 goog.require('goog.asserts');
+goog.require('goog.dom');
 goog.require('goog.userAgent');
 
 
@@ -252,7 +253,7 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
  * @return {?string} A string representing a valid number, or null if invalid.
  */
 Blockly.FieldTextInput.numberValidator = function(text) {
-  if(text === null) {
+  if (text === null) {
     return null;
   }
   // TODO: Handle cases like 'ten', '1.203,14', etc.

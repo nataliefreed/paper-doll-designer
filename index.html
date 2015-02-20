@@ -52,9 +52,9 @@
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
-			<h3>
-				Paper Doll Maker
-			</h3>
+			<h1>
+				Paper Doll Designer
+			</h1>
 			<dl>
 				<dd>
 					Choose clothes and accessories and decorate them with code!
@@ -140,8 +140,6 @@
 					<block type="logic_compare"></block>
 					<block type="math_number"></block>
 					<block type="math_arithmetic"></block>
-					<block type="text"></block>
-					<block type="text_print"></block>
 				</category>
 				<sep></sep>
 				<category name="Variables" custom="VARIABLE"></category>
@@ -164,13 +162,19 @@
 	Blockly.inject(document.getElementById('blocklyDiv'),
 			{toolbox: document.getElementById('toolbox')});
 
-	Blockly.Blocks['math_number'].colour = 92;
-
 	function blocksToJavascript() {
 		var code = Blockly.JavaScript.workspaceToCode();
 		$("#textarea").html(code);
 	}
 	Blockly.addChangeListener(blocksToJavascript);
+
+//	Blockly.Blocks.colour.HUE = 10;
+//	Blockly.Blocks.lists.HUE = 10;
+	Blockly.Blocks.logic.HUE = 93;
+	Blockly.Blocks.loops.HUE = 43;
+	Blockly.Blocks.math.HUE = 93;
+	Blockly.Blocks.procedures.HUE = 270;
+	Blockly.Blocks.variables.HUE = 29;
 </script>
 
 <script>
@@ -333,17 +337,12 @@
         onLoad: function(item) {
         	item.position.x = view.center.x+rulerWidth/2;
             console.log("doll loaded");
-        }
-    });
 
-    project.importSVG('assets/hair in bun.svg', {
-        expandShapes: true,
-        onLoad: function(item) {
-    		item.position.x = view.center.x+rulerWidth/2+1;
-		}
-    });
-
-	project.importSVG('assets/no sleeve dress.svg', {
+            project.importSVG('assets/hair in bun.svg', {
+       		 	expandShapes: true,
+        		onLoad: function(item) {
+    			item.position.x = view.center.x+rulerWidth/2+1;
+    			project.importSVG('assets/no sleeve dress.svg', {
 		expandShapes: true,
 		onLoad: function(item) {
 			outfit = item;
@@ -377,10 +376,10 @@
 			cursorX.dashArray = [6, 4];
 		}
 	});
-
-
-
-
+			}
+    		});
+        }
+    });
 
 	this.addStripe = function addStripe(angle) {
 

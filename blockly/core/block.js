@@ -273,11 +273,11 @@ Blockly.Block.prototype.getConnections_ = function(all) {
     if (this.outputConnection) {
       myConnections.push(this.outputConnection);
     }
-    if (this.nextConnection) {
-      myConnections.push(this.nextConnection);
-    }
     if (this.previousConnection) {
       myConnections.push(this.previousConnection);
+    }
+    if (this.nextConnection) {
+      myConnections.push(this.nextConnection);
     }
     if (all || !this.collapsed_) {
       for (var i = 0, input; input = this.inputList[i]; i++) {
@@ -509,6 +509,40 @@ Blockly.Block.prototype.setEditable = function(editable) {
   var icons = this.getIcons();
   for (var i = 0; i < icons.length; i++) {
     icons[i].updateEditable();
+  }
+};
+
+/**
+ * Set whether the connections are hidden (not tracked in a database) or not.
+ * Recursively walk down all child blocks (except collapsed blocks).
+ * @param {boolean} hidden True if connections are hidden.
+ */
+Blockly.Block.prototype.setConnectionsHidden = function(hidden) {
+  if (!hidden && this.isCollapsed()) {
+    if (this.outputConnection) {
+      this.outputConnection.setHidden(hidden);
+    }
+    if (this.previousConnection) {
+      this.previousConnection.setHidden(hidden);
+    }
+    if (this.nextConnection) {
+      this.nextConnection.setHidden(hidden);
+      var child = this.nextConnection.targetBlock();
+      if (child) {
+        child.setConnectionsHidden(hidden);
+      }
+    }
+  } else {
+    var myConnections = this.getConnections_(true);
+    for (var i = 0, connection; connection = myConnections[i]; i++) {
+      connection.setHidden(hidden);
+      if (connection.isSuperior()) {
+        var child = connection.targetBlock();
+        if (child) {
+          child.setConnectionsHidden(hidden);
+        }
+      }
+    }
   }
 };
 

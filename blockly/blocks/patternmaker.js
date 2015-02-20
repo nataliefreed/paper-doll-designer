@@ -10,7 +10,7 @@ goog.require('Blockly.Blocks');
 Blockly.Blocks['patternmaker_stripe'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(330);
+    this.setColour(160);
     this.appendDummyInput()
         .appendField("draw ")
         .appendField(new Blockly.FieldAngle("0"), "ANGLE")
@@ -27,7 +27,7 @@ Blockly.Blocks['patternmaker_stripe'] = {
 Blockly.Blocks['patternmaker_start'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(310);
+    this.setColour(43);
     this.appendDummyInput()
         .appendField("start");
     this.setInputsInline(true);
@@ -40,7 +40,7 @@ Blockly.Blocks['patternmaker_start'] = {
 Blockly.Blocks['patternmaker_pen_color'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(330);
+    this.setColour(160);
     this.appendDummyInput()
         .appendField("set pen color to")
         .appendField(new Blockly.FieldColour("#009900"), "PEN_COLOR");
@@ -55,7 +55,7 @@ Blockly.Blocks['patternmaker_pen_color'] = {
 Blockly.Blocks['patternmaker_pen_size'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(290);
+    this.setColour(160);
     this.appendValueInput("PEN_SIZE")
         .setCheck("Number")
         .appendField("set pen size to");
@@ -71,7 +71,7 @@ Blockly.Blocks['patternmaker_pen_size'] = {
 Blockly.Blocks['patternmaker_move_up'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(330);
+    this.setColour(225);
     this.appendValueInput("MOVE_UP")
         .setCheck("Number")
         .appendField("move up");
@@ -87,7 +87,7 @@ Blockly.Blocks['patternmaker_move_up'] = {
 Blockly.Blocks['patternmaker_move_right'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(330);
+    this.setColour(225);
     this.appendValueInput("MOVE_RIGHT")
         .setCheck("Number")
         .appendField("move right");
@@ -104,7 +104,7 @@ Blockly.Blocks['patternmaker_move_right'] = {
 Blockly.Blocks['patternmaker_setx'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(330);
+    this.setColour(225);
     this.appendValueInput("X")
         .setCheck("Number")
         .appendField("set x to");
@@ -118,7 +118,7 @@ Blockly.Blocks['patternmaker_setx'] = {
 Blockly.Blocks['patternmaker_sety'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(330);
+    this.setColour(225);
     this.appendValueInput("Y")
         .setCheck("Number")
         .appendField("set y to");
@@ -132,7 +132,7 @@ Blockly.Blocks['patternmaker_sety'] = {
 Blockly.Blocks['patternmaker_clear'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(330);
+    this.setColour(160);
     this.appendDummyInput()
         .appendField("clear");
     this.setInputsInline(true);
@@ -146,7 +146,7 @@ Blockly.Blocks['patternmaker_clear'] = {
 Blockly.Blocks['patternmaker_draw_shape'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(290);
+    this.setColour(160);
     this.appendDummyInput()
         .appendField("draw")
         .appendField(new Blockly.FieldDropdown([["star", "STAR"], ["rectangle", "RECTANGLE"], ["circle", "CIRCLE"], ["diamond", "DIAMOND"], ["heart", "HEART"], ["triangle", "TRIANGLE"]]), "SHAPE");

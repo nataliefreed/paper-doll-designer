@@ -29,6 +29,8 @@ goog.provide('Blockly.inject');
 goog.require('Blockly.Css');
 goog.require('Blockly.WorkspaceSvg');
 goog.require('goog.dom');
+goog.require('goog.ui.Component');
+goog.require('goog.userAgent');
 
 
 /**
@@ -126,6 +128,10 @@ Blockly.parseOptions_ = function(options) {
   if (hasSounds === undefined) {
     hasSounds = true;
   }
+  var hasCss = options['css'];
+  if (hasCss === undefined) {
+    hasCss = true;
+  }
   var enableRealtime = !!options['realtime'];
   var realtimeOptions = enableRealtime ? options['realtimeOptions'] : undefined;
 
@@ -145,6 +151,7 @@ Blockly.parseOptions_ = function(options) {
   Blockly.hasScrollbars = hasScrollbars;
   Blockly.hasTrashcan = hasTrashcan;
   Blockly.hasSounds = hasSounds;
+  Blockly.hasCss = hasCss;
   Blockly.languageTree = tree;
   Blockly.enableRealtime = enableRealtime;
   Blockly.realtimeOptions = realtimeOptions;
