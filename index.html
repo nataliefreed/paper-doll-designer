@@ -80,7 +80,7 @@
 		</div>
 
 		<div class="col-md-1 column">
-			<button type="button" class="btn btn-default btn-lg" onclick="downloadSVG()">Make it!</button>
+			<button type="button" class="btn btn-default btn-lg" onclick="downloadBitmap()">Make it!</button>
 		</div>
 		<!--</div>-->
 	</div>
@@ -108,8 +108,8 @@
 							</block>
 						</value>
 					</block>
-					<block type="patternmaker_move_up">
-						<value name="MOVE_UP">
+					<block type="patternmaker_move_down">
+						<value name="MOVE_DOWN">
 							<block type="math_number">
 								<field name="NUM">10</field>
 							</block>
@@ -184,10 +184,10 @@
 <script>
 	var paperscript = {}; //hold functions and variables defined inside the paperscript code
 
-	var xPos = 30;
-	var yPos = 110;
+	var xPos = 35;
+	var yPos = 105;
 	var penColor = '#FFFFFF';
-	var penSize = 4;
+	var penSize = 2;
 	var w = 300;
 	var h = 510;
 
@@ -210,6 +210,11 @@
 		paperscript.addStripe(angle);
 	}
 
+	function drawShape(shape)
+	{
+		paperscript.drawShape(shape);
+	}
+
 	function setPenSize(size) {
 		penSize = size;
 	}
@@ -218,17 +223,17 @@
 		penColor = color;
 	}
 
-	function colorChange() {
-		var red = Math.round(Math.random() * 255);
-		var green = Math.round(Math.random() * 255);
-		var blue = Math.round(Math.random() * 255);
-		activeOutfit.set('fill', 'rgba(' + red + ',' + green + ',' + blue + ',1)');
-		console.log("changed color to " + red + "," + green + "," + blue);
-		canvas.renderAll();
-	}
+//	function colorChange() {
+//		var red = Math.round(Math.random() * 255);
+//		var green = Math.round(Math.random() * 255);
+//		var blue = Math.round(Math.random() * 255);
+//		activeOutfit.set('fill', 'rgba(' + red + ',' + green + ',' + blue + ',1)');
+//		console.log("changed color to " + red + "," + green + "," + blue);
+//		canvas.renderAll();
+//	}
 
-	function moveUp(spaces) {
-		paperscript.moveUp(spaces);
+	function moveDown(spaces) {
+		paperscript.moveDown(spaces);
 	}
 
 	function moveRight(spaces) {
@@ -253,6 +258,15 @@
 		});
 	};
 
+	function downloadBitmap() {
+//		var canvas = document.getElementById("dollCanvas");
+//		var img    = canvas.toDataURL("image/png");
+		paperscript.hideAllExceptOutfit();
+		window.open().location = document.getElementById("dollCanvas").toDataURL("image/png");
+	}
+
+
+
 
 </script>
 
@@ -260,7 +274,7 @@
 
 <script type="text/paperscript" canvas="dollCanvas">
 
-	var outfit;
+	var activeOutfit;
 	var patternGroup;
 	var cursor;
 	var cursorX;
@@ -272,8 +286,23 @@
 
 	console.log(markingWidth);
 
-	function toPaperCoords(pos) {
+	function toPaperCoordsX(pos) {
 		return pos * markingWidth;
+	}
+
+	function toPaperCoordsY(pos) {
+		return h - (pos * markingWidth);
+	}
+
+	this.hideAllExceptOutfit = function hideAllExceptOutfit() {
+
+		for(var i=0;i<project.activeLayer.children.length;i++) {
+			project.activeLayer.children[i].visible = false;
+		}
+		activeOutfit.visible = true;
+		patternGroup.visible = true;
+
+		paper.view.draw();
 	}
 
 	var backgroundRect = new Rectangle(new Point(rulerWidth, 0), new Point(w+rulerWidth, h+rulerWidth));
@@ -349,33 +378,33 @@
     			project.importSVG('assets/no sleeve dress.svg', {
 		expandShapes: true,
 		onLoad: function(item) {
-			outfit = item;
-			outfit.position.x = view.center.x+rulerWidth/2;
-			patternGroup = new Group(outfit.clone());
+			activeOutfit = item;
+			activeOutfit.position.x = view.center.x+rulerWidth/2;
+			patternGroup = new Group(activeOutfit.clone());
 			patternGroup.clipped = true;
 
-			var star = new Path.Star({
+			/*var star = new Path.Star({
 				center: view.center,
 				points: 6,
 				radius1: 20,
 				radius2: 40,
 				fillColor: 'red'
 			});
-			patternGroup.addChild(star);
+			patternGroup.addChild(star);*/
 
 			//set up cursors to show current x, y position
 
-			cursor = new Point(rulerWidth+toPaperCoords(xPos), h-toPaperCoords(yPos));
+			cursor = new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos));
 
 			//horizontal
-			cursorY = new Path.Line(new Point(rulerWidth, h-toPaperCoords(yPos)), cursor);
-			//cursorY = new Path.Line(new Point(rulerWidth, h-toPaperCoords(yPos)), new Point(rulerWidth+toPaperCoords(xPos), h-toPaperCoords(yPos)));
+			cursorY = new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), cursor);
+			//cursorY = new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), new Point(rulerWidth+toPaperCoordsX(xPos), h-toPaperCoordsY(yPos)));
 			cursorY.strokeColor = '#7C7C7D';
 			cursorY.dashArray = [6, 4];
 
 			//vertical
-			cursorX = new Path.Line(new Point(rulerWidth+toPaperCoords(xPos), h), cursor);
-			//cursorX = new Path.Line(new Point(rulerWidth+toPaperCoords(xPos), toPaperCoords(h)), new Point(rulerWidth+toPaperCoords(xPos), h-toPaperCoords(yPos)));
+			cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), h), cursor);
+			//cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(h)), new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos)));
 			cursorX.strokeColor = '#7C7C7D';
 			cursorX.dashArray = [6, 4];
 		}
@@ -391,12 +420,14 @@
 		var path = new paper.Path();
 		// Give the stroke a color
 		path.strokeColor = penColor;
-		path.strokeWidth = toPaperCoords(penSize);
-		var start = new paper.Point(0, yPos);
+		path.strokeWidth = toPaperCoordsX(penSize);
+		var start = new paper.Point(0, toPaperCoordsY(yPos));
+		console.log("yPos: " + yPos);
+		console.log("paper yPos: " + toPaperCoordsY(yPos));
 		// Move to start and draw a line from there
 		path.moveTo(start);
 
-		path.lineTo(start.add([300, 0]));
+		path.lineTo(start.add([w, 0]));
 
 		patternGroup.addChild(path);
 
@@ -404,30 +435,77 @@
 		paper.view.draw();
 	}
 
+	this.drawShape = function drawShape(shape) {
+
+		if(shape === 'STAR') {
+
+	 		var star = new Path.Star({
+				center: [rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos)],
+				points: 5,
+				radius1: toPaperCoordsX(penSize/2),
+				radius2: toPaperCoordsX(penSize),
+				fillColor: penColor
+			});
+			patternGroup.addChild(star);
+		}
+		else if(shape === 'RECTANGLE')
+		{
+
+
+		}
+		else if(shape === 'CIRCLE')
+		{
+			var circle = new Path.Ellipse({
+				center: [rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos)],
+				radius: toPaperCoordsX(penSize),
+				fillColor: penColor
+			});
+			patternGroup.addChild(circle);
+
+		}
+		else if(shape === 'DIAMOND')
+		{
+
+
+		}
+		else if(shape === 'HEART')
+		{
+
+
+		}
+		else if(shape === 'TRIANGLE')
+		{
+
+
+		}
+		paper.view.draw();
+	}
+
 	this.updateCursors = function updateCursors()
 	{
-		cursor.x = rulerWidth + toPaperCoords(xPos);
-		cursor.y = h - toPaperCoords(yPos);
+		cursor.x = rulerWidth + toPaperCoordsX(xPos);
+		cursor.y = toPaperCoordsY(yPos);
 
-		//cursorY.replaceWith(new Path.Line(new Point(rulerWidth, h-toPaperCoords(yPos)), cursor));
-		//cursorX.replaceWith(new Path.Line(new Point(rulerWidth+toPaperCoords(xPos), h), cursor));
+		//cursorY.replaceWith(new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), cursor));
+		//cursorX.replaceWith(new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), h), cursor));
 
 		paper.view.draw();
 	}
 
-	this.moveUp = function moveUp(spaces) {
-		yPos -= spaces; //different coordinate systems
+	this.moveDown = function moveDown(spaces) {
+		yPos -= spaces;
 		console.log('yPos: ' + yPos);
-		cursorY.position.y -= spaces;
-		cursorX.position.y -= spaces;
+		console.log("paper yPos: " + toPaperCoordsY(yPos));
+		cursorY.position.y += toPaperCoordsX(spaces);
+		cursorX.position.y += toPaperCoordsX(spaces);
 		paper.view.draw();
 	}
 
 	this.moveRight = function moveRight(spaces) {
-		xPos += spaces; //different coordinate systems
-		console.log('xPos: ' + yPos);
-		cursorX.position.x += spaces;
-		cursorY.position.x += spaces;
+		xPos += spaces;
+		console.log('xPos: ' + xPos);
+		cursorX.position.x += toPaperCoordsX(spaces);
+		cursorY.position.x += toPaperCoordsX(spaces);
 		paper.view.draw();
 	}
 

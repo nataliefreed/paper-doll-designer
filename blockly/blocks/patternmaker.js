@@ -67,13 +67,13 @@ Blockly.Blocks['patternmaker_pen_size'] = {
 };
 
 //https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#nnbxts
-Blockly.Blocks['patternmaker_move_up'] = {
+Blockly.Blocks['patternmaker_move_down'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(225);
-    this.appendValueInput("MOVE_UP")
+    this.appendValueInput("MOVE_DOWN")
         .setCheck("Number")
-        .appendField("move up");
+        .appendField("move down");
     this.appendDummyInput()
         .appendField("spaces");
     this.setInputsInline(true);

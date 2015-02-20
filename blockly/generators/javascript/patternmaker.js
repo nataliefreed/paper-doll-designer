@@ -32,9 +32,9 @@ Blockly.JavaScript['patternmaker_pen_size'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['patternmaker_move_up'] = function(block) {
-  var value_moveup = Blockly.JavaScript.valueToCode(block, 'MOVE_UP', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'moveUp(' + value_moveup + ');';
+Blockly.JavaScript['patternmaker_move_down'] = function(block) {
+  var value_movedown = Blockly.JavaScript.valueToCode(block, 'MOVE_DOWN', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'moveDown(' + value_movedown + ');';
   return code;
 };
 
@@ -68,7 +68,7 @@ Blockly.JavaScript['patternmaker_draw_shape'] = function(block) {
   var value_width = Blockly.JavaScript.valueToCode(block, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC);
   var value_height = Blockly.JavaScript.valueToCode(block, 'HEIGHT', Blockly.JavaScript.ORDER_ATOMIC);
   var colour_color = block.getFieldValue('COLOR');
-  var code = 'drawShape(' + dropdown_shape + ', ' + value_width + ', ' + value_height + ', ' + colour_color + ');';
+  var code = "drawShape(" + "\'" + dropdown_shape + "\');";
   return code;
 };
 
