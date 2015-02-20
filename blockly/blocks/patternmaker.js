@@ -15,7 +15,6 @@ Blockly.Blocks['patternmaker_stripe'] = {
         .appendField("draw ")
         .appendField(new Blockly.FieldAngle("0"), "ANGLE")
         .appendField("stripe")
-        .appendField(new Blockly.FieldImage("http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Auto_Racing_Red_Stripe.svg/800px-Auto_Racing_Red_Stripe.svg.png", 20, 15, "*"));
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -150,15 +149,6 @@ Blockly.Blocks['patternmaker_draw_shape'] = {
     this.appendDummyInput()
         .appendField("draw")
         .appendField(new Blockly.FieldDropdown([["star", "STAR"], ["rectangle", "RECTANGLE"], ["circle", "CIRCLE"], ["diamond", "DIAMOND"], ["heart", "HEART"], ["triangle", "TRIANGLE"]]), "SHAPE");
-    this.appendValueInput("WIDTH")
-        .setCheck("Number")
-        .appendField("with width:");
-    this.appendValueInput("HEIGHT")
-        .setCheck("Number")
-        .appendField("height:");
-    this.appendDummyInput()
-        .appendField("color:")
-        .appendField(new Blockly.FieldColour("#ffcc00"), "COLOR");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

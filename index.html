@@ -16,11 +16,11 @@
 	<![endif]-->
 
 	<!-- Fav and touch icons -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="img/favicon.png">
+	<!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">-->
+	<!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">-->
+	<!--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">-->
+	<!--<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">-->
+	<link rel="shortcut icon" href="assets/favicon.png">
 
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -63,13 +63,32 @@
 		</div>
 	</div>
 	<div class="row clearfix">
-		<div class="col-md-2 column">
-			<button type="button" class="btn btn-default" onclick="printCode()">Print code</button>
-			<button type="button" class="btn btn-default" onclick="runCode()">Run code</button>
-			<button type="button" class="btn btn-default" onclick="colorChange()">Randomize color</button>
-			<button type="button" class="btn btn-default" onclick="paperscript.addStripe(0)">Add stripe</button>
-			<button type="button" class="btn btn-default" onclick="downloadSVG()">Download</button>
+		<div class="col-md-4 column">
+
+		<!--<div class="col-md-2 column">-->
+			<button type="button" class="btn btn-default btn-lg" onclick="changeOutfit()">Change outfit</button>
+			<button type="button" class="btn btn-default btn-lg" onclick="changeHair()">Change hair</button>
+			<button type="button" class="btn btn-default btn-lg" onclick="clearDesign()">Clear design</button>
 		</div>
+
+
+		<div class="col-md-2 column">
+			<button type="button" class="btn btn-success btn-lg btn-block" onclick="runCode()">Run code</button>
+		</div>
+
+		<div class="col-md-4 column">
+		</div>
+
+		<div class="col-md-1 column">
+			<button type="button" class="btn btn-default btn-lg" onclick="downloadSVG()">Make it!</button>
+		</div>
+		<!--</div>-->
+	</div>
+
+	<div class="row clearfix">
+		<br>
+	</div>
+	<div class="row clearfix">
 		<div class="col-md-3 column">
 			<canvas id="dollCanvas" width="340" height="550"></canvas>
 		</div>
@@ -78,9 +97,9 @@
 		<div class="col-md-6 column">
 
 			<xml id="toolbox" style="display: none">
-				<category name="Drawing">
-					<block type="patternmaker_clear"></block>
+					<!--<block type="patternmaker_clear"></block>-->
 					<block type="patternmaker_stripe"></block>
+					<block type="patternmaker_draw_shape"></block>
 					<block type="patternmaker_pen_color"></block>
 					<block type="patternmaker_pen_size">
 						<value name="PEN_SIZE">
@@ -117,37 +136,20 @@
 							</block>
 						</value>
 					</block>
-					<block type="patternmaker_draw_shape">
-						<value name="WIDTH">
-							<block type="math_number">
-								<field name="NUM">6</field>
-							</block>
-						</value>
-						<value name="HEIGHT">
-							<block type="math_number">
-								<field name="NUM">6</field>
-							</block>
-						</value>
-					</block>
-				</category>
-				<category name="Control">
-					<block type="patternmaker_start"></block>
+
+					<!--<block type="patternmaker_start"></block>-->
 					<block type="controls_repeat"></block>
 
-
-				</category>
-				<category name="Math">
-					<block type="logic_compare"></block>
 					<block type="math_number"></block>
 					<block type="math_arithmetic"></block>
-				</category>
-				<sep></sep>
-				<category name="Variables" custom="VARIABLE"></category>
-				<category name="Functions" custom="PROCEDURE"></category>
+					<block type="logic_compare"></block>
+
+
 			</xml>
 			<div id="blocklyDiv" style="height: 540px; width: 700px;"></div>
 		</div>
 	</div>
+</div>
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<div id="textarea"></div>
@@ -156,8 +158,16 @@
 </div>
 
 <script>
-	Blockly.HSV_SATURATION = 1.0;
+	Blockly.HSV_SATURATION = 0.7;
 	Blockly.HSV_VALUE = 0.8;
+
+	//	Blockly.Blocks.colour.HUE = 10;
+	//	Blockly.Blocks.lists.HUE = 10;
+	Blockly.Blocks.logic.HUE = 93;
+	Blockly.Blocks.loops.HUE = 43;
+	Blockly.Blocks.math.HUE = 93;
+	Blockly.Blocks.procedures.HUE = 270;
+	Blockly.Blocks.variables.HUE = 29;
 
 	Blockly.inject(document.getElementById('blocklyDiv'),
 			{toolbox: document.getElementById('toolbox')});
@@ -167,15 +177,9 @@
 		$("#textarea").html(code);
 	}
 	Blockly.addChangeListener(blocksToJavascript);
-
-//	Blockly.Blocks.colour.HUE = 10;
-//	Blockly.Blocks.lists.HUE = 10;
-	Blockly.Blocks.logic.HUE = 93;
-	Blockly.Blocks.loops.HUE = 43;
-	Blockly.Blocks.math.HUE = 93;
-	Blockly.Blocks.procedures.HUE = 270;
-	Blockly.Blocks.variables.HUE = 29;
 </script>
+
+
 
 <script>
 	var paperscript = {}; //hold functions and variables defined inside the paperscript code
