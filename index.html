@@ -262,11 +262,10 @@
 //		var canvas = document.getElementById("dollCanvas");
 //		var img    = canvas.toDataURL("image/png");
 		paperscript.hideAllExceptOutfit();
-		window.open().location = document.getElementById("dollCanvas").toDataURL("image/png");
+		var png = document.getElementById("dollCanvas").toDataURL("image/png");
+		paperscript.showItAgain();
+		window.open().location = png;
 	}
-
-
-
 
 </script>
 
@@ -301,6 +300,14 @@
 		}
 		activeOutfit.visible = true;
 		patternGroup.visible = true;
+
+		paper.view.draw();
+	}
+
+	this.showItAgain = function showItAgain() {
+		for(var i=0;i<project.activeLayer.children.length;i++) {
+			project.activeLayer.children[i].visible = true;
+		}
 
 		paper.view.draw();
 	}
@@ -397,14 +404,14 @@
 			cursor = new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos));
 
 			//horizontal
-			cursorY = new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), cursor);
-			//cursorY = new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), new Point(rulerWidth+toPaperCoordsX(xPos), h-toPaperCoordsY(yPos)));
+			cursorY = new Path.Line(new Point(-1*w, toPaperCoordsY(yPos)), cursor);
+			//cursorY = new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), cursor);
 			cursorY.strokeColor = '#7C7C7D';
 			cursorY.dashArray = [6, 4];
 
 			//vertical
-			cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), h), cursor);
-			//cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(h)), new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos)));
+			cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), 2*h), cursor);
+			//cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), h), cursor);
 			cursorX.strokeColor = '#7C7C7D';
 			cursorX.dashArray = [6, 4];
 		}
