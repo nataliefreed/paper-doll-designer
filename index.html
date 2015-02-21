@@ -730,7 +730,7 @@
 		// Give the stroke a color
 		path.strokeColor = penColor;
 		path.strokeWidth = toPaperCoordsX(penSize);
-		var start = new paper.Point(0, toPaperCoordsY(yPos));
+		var start = new paper.Point(-1*w*2, toPaperCoordsY(yPos));
 		console.log("yPos: " + yPos);
 		console.log("paper yPos: " + toPaperCoordsY(yPos));
 		// Move to start and draw a line from there

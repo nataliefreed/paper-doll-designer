@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a0bf5b9e-7649-4a3e-85b2-b5bc3ded3205" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="paper-doll-designer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,8 +30,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43137255" vertical-offset="10806" max-vertical-offset="12765">
-              <caret line="738" column="34" selection-start-line="738" selection-start-column="34" selection-end-line="738" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.28431374" vertical-offset="10806" max-vertical-offset="12765">
+              <caret line="732" column="66" selection-start-line="732" selection-start-column="66" selection-end-line="732" selection-end-column="66" />
               <folding>
                 <element signature="n#style#0;n#xml#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#xml#1;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -213,8 +214,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43137255" vertical-offset="10806" max-vertical-offset="12765">
-          <caret line="738" column="34" selection-start-line="738" selection-start-column="34" selection-end-line="738" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.28431374" vertical-offset="10806" max-vertical-offset="12765">
+          <caret line="732" column="66" selection-start-line="732" selection-start-column="66" selection-end-line="732" selection-end-column="66" />
           <folding>
             <element signature="n#style#0;n#xml#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#xml#1;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
