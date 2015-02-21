@@ -569,6 +569,7 @@
 		patternGroup.removeChildren();
 		patternGroup = new Group(activeOutfit.clone());
 		patternGroup.clipped = true;
+		paper.view.draw();
 	}
 
 	var backgroundRect = new Rectangle(new Point(rulerWidth, 0), new Point(w+rulerWidth, h+rulerWidth));
@@ -735,9 +736,10 @@
 		// Move to start and draw a line from there
 		path.moveTo(start);
 
-		path.lineTo(start.add([w, 0]));
+		path.lineTo(start.add([w*3, 0]));
 
-		path.rotate(360-angle);
+		var rotateAround = new Point(rulerWidth+ toPaperCoordsX(xPos), toPaperCoordsY(yPos));
+		path.rotate(360-angle, rotateAround);
 
 		patternGroup.addChild(path);
 
