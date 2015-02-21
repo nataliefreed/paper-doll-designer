@@ -63,25 +63,22 @@
 		</div>
 	</div>
 	<div class="row clearfix">
-		<div class="col-md-4 column">
-
-		<!--<div class="col-md-2 column">-->
+		<div class="col-md-5 column">
 			<button type="button" class="btn btn-default btn-lg" onclick="changeOutfit()">Change outfit</button>
 			<button type="button" class="btn btn-default btn-lg" onclick="changeHair()">Change hair</button>
-			<button type="button" class="btn btn-default btn-lg" onclick="clearDesign()">Clear design</button>
+			<button type="button" class="btn btn-default btn-lg" onclick="changeSkinTone()">Change skin tone</button>
 		</div>
 
-
-		<div class="col-md-2 column">
-			<button type="button" class="btn btn-success btn-lg btn-block" onclick="runCode()">Run code</button>
-		</div>
 
 		<div class="col-md-4 column">
+
 		</div>
 
-		<div class="col-md-1 column">
-			<button type="button" class="btn btn-default btn-lg" onclick="downloadBitmap()">Make it!</button>
+		<div class="col-md-2 column text-right">
+			<button type="button" class="btn btn-info btn-lg btn-block" onclick="runCode()">Run code</button>
 		</div>
+
+
 		<!--</div>-->
 	</div>
 
@@ -97,17 +94,18 @@
 		<div class="col-md-6 column">
 
 			<xml id="toolbox" style="display: none">
-					<!--<block type="patternmaker_clear"></block>-->
+					<block type="patternmaker_clear"></block>
 					<block type="patternmaker_stripe"></block>
 					<block type="patternmaker_draw_shape"></block>
 					<block type="patternmaker_pen_color"></block>
 					<block type="patternmaker_pen_size">
 						<value name="PEN_SIZE">
 							<block type="math_number">
-								<field name="NUM">6</field>
+								<field name="NUM">2</field>
 							</block>
 						</value>
 					</block>
+					<block type="patternmaker_goTo"></block>
 					<block type="patternmaker_move_down">
 						<value name="MOVE_DOWN">
 							<block type="math_number">
@@ -122,36 +120,70 @@
 							</block>
 						</value>
 					</block>
-					<block type="patternmaker_setx">
+					<block type="patternmaker_setxy">
 						<value name="X">
 							<block type="math_number">
-								<field name="NUM">0</field>
+								<field name="NUM">45</field>
 							</block>
 						</value>
-					</block>
-					<block type="patternmaker_sety">
 						<value name="Y">
 							<block type="math_number">
-								<field name="NUM">0</field>
+								<field name="NUM">100</field>
 							</block>
 						</value>
 					</block>
 
 					<!--<block type="patternmaker_start"></block>-->
-					<block type="controls_repeat"></block>
+					<block type="controls_repeat_ext">
+						<value name="TIMES">
+							<block type="math_number">
+								<field name="NUM">5</field>
+							</block>
+						</value>
+					</block>
 
 					<block type="math_number"></block>
 					<block type="math_arithmetic"></block>
-					<block type="logic_compare"></block>
+					<!--<block type="variables_get"></block>-->
+					<!--<block type="variables_set">-->
+						<!--<value name="VALUE">-->
+							<!--<block type="math_number">-->
+								<!--<field name="NUM">0</field>-->
+							<!--</block>-->
+						<!--</value>-->
+					<!--</block>-->
+					<!--<block type="math_change">-->
+						<!--<value name="DELTA">-->
+							<!--<block type="math_number">-->
+								<!--<field name="NUM">1</field>-->
+							<!--</block>-->
+						<!--</value>-->
+					<!--</block>-->
+
+
+					<!--<block type="logic_compare"></block>-->
 
 
 			</xml>
+
+			<xml id="startBlocks" style="display: none">
+				<block type="patternmaker_start" id="start" movable="false" x="50" y="50">
+			</xml>
+
 			<div id="blocklyDiv" style="height: 540px; width: 700px;"></div>
 		</div>
 	</div>
-</div>
+
+	<!--<div class="row clearfix">-->
+		<!--<br>-->
+	<!--</div>-->
+
 	<div class="row clearfix">
-		<div class="col-md-12 column">
+		<div class="col-md-11 column text-right">
+			<button type="button" class="btn btn-default btn-lg" onclick="downloadBitmapDoll()">Print doll</button>
+			<button type="button" class="btn btn-default btn-lg" onclick="downloadBitmapOutfit()">Print outfit</button>
+		</div>
+		<div class="col-md-2 column">
 			<div id="textarea"></div>
 		</div>
 	</div>
@@ -159,7 +191,7 @@
 
 <script>
 	Blockly.HSV_SATURATION = 0.7;
-	Blockly.HSV_VALUE = 0.8;
+	Blockly.HSV_VALUE = 0.9;
 
 	//	Blockly.Blocks.colour.HUE = 10;
 	//	Blockly.Blocks.lists.HUE = 10;
@@ -168,14 +200,32 @@
 	Blockly.Blocks.math.HUE = 93;
 	Blockly.Blocks.procedures.HUE = 270;
 	Blockly.Blocks.variables.HUE = 29;
+	Blockly.Blocks.math_change.HUE = 29; //doesn't seem to be working
 
 	Blockly.inject(document.getElementById('blocklyDiv'),
 			{toolbox: document.getElementById('toolbox')});
 
+	Blockly.Xml.domToWorkspace(Blockly.mainWorkspace,
+			document.getElementById('startBlocks'));
+
 	function blocksToJavascript() {
-		var code = Blockly.JavaScript.workspaceToCode();
-		$("#textarea").html(code);
+//		var code = Blockly.JavaScript.workspaceToCode();
+
+		var code = getCodeInStartBlock();
+		console.log(code);
+//		$("#textarea").html(code);
 	}
+
+	//by FG
+	 function getCodeInStartBlock() {
+		function isDoBlock(b) { return b.type == "patternmaker_start"; }
+		var do_blocks = Blockly.mainWorkspace.getAllBlocks().filter(isDoBlock);
+		console.assert(do_blocks.length <= 1, "More than one do block!");
+		return Blockly.JavaScript.blockToCode(do_blocks[0]);
+	}
+
+
+
 	Blockly.addChangeListener(blocksToJavascript);
 </script>
 
@@ -197,7 +247,8 @@
 
 	function runCode() {
 		Blockly.JavaScript.addReservedWords('code');
-		var code = Blockly.JavaScript.workspaceToCode();
+		//var code = Blockly.JavaScript.workspaceToCode();
+		var code = getCodeInStartBlock();
 		try {
 			eval(code);
 		} catch (e) {
@@ -221,6 +272,16 @@
 
 	function setPenColor(color) {
 		penColor = color;
+	}
+
+	function goToLocation(location)
+	{
+		paperscript.goToLocation(location);
+	}
+
+	function goToXY(x, y)
+	{
+		paperscript.goToXY(x, y);
 	}
 
 //	function colorChange() {
@@ -258,13 +319,35 @@
 		});
 	};
 
-	function downloadBitmap() {
-//		var canvas = document.getElementById("dollCanvas");
-//		var img    = canvas.toDataURL("image/png");
+	function downloadBitmapDoll() {
+		paperscript.hideAllExceptDollAndOutfit();
+		var png = document.getElementById("dollCanvas").toDataURL("image/png");
+		paperscript.showItAgain();
+		window.open().location = png;
+	}
+
+	function downloadBitmapOutfit() {
 		paperscript.hideAllExceptOutfit();
 		var png = document.getElementById("dollCanvas").toDataURL("image/png");
 		paperscript.showItAgain();
 		window.open().location = png;
+	}
+
+	function changeOutfit() {
+		paperscript.changeOutfit();
+	}
+
+	function changeHair() {
+		paperscript.changeHair();
+
+	}
+
+	function changeSkinTone() {
+		paperscript.changeSkinTone();
+	}
+
+	function clearPattern() {
+		paperscript.clearPattern();
 	}
 
 </script>
@@ -280,6 +363,21 @@
 	var cursorY;
 	var rulerWidth = 40;
 
+	var pantsAndShirt;
+	var doll;
+	var dress;
+	var shirt;
+	var pants;
+
+	var active_hair;
+	var short_hair;
+	var bun_hair;
+
+	//skin tone palette from http://bitstrips.com/r/RK8C0
+	var skin_tone_options = [ '#FAE7D0', '#FFCC99', '#FEB186', '#DFC183', '#CEAB69', '#B98865', '#AA724B', '#935D37', '#7B4B2A', '#C8ACA3', '#E8ACA3', '#E8CDA8', '#7B4B2A', '#483728', '#CAA661', '#57319' ];
+
+	var backgroundThings = new Group();
+
 	var numMarkings = 150; //cm
 	var markingWidth = h / 150;
 
@@ -293,47 +391,213 @@
 		return h - (pos * markingWidth);
 	}
 
+	this.changeHair = function changeHair() {
+		if(active_hair === bun_hair)
+		{
+			active_hair = short_hair;
+			bun_hair.visible = false;
+			short_hair.visible = true;
+		}
+		else if(active_hair === short_hair)
+		{
+			active_hair = bun_hair;
+			short_hair.visible = false;
+			bun_hair.visible = true;
+		}
+
+		active_hair.fillColor = new Color(Math.random(), Math.random(), Math.random());
+		paper.view.draw();
+	}
+
+	this.changeSkinTone = function changeSkinTone() {
+		var tone = skin_tone_options[Math.floor(Math.random() * skin_tone_options.length)];
+		doll.fillColor = tone;
+		paper.view.draw();
+	}
+
+	this.changeOutfit = function changeOutfit() {
+		if(activeOutfit == dress)
+		{
+			activeOutfit = pantsAndShirt;
+
+			doll.visible = false;
+
+			for(var i=0;i<pantsAndShirt.children.length;i++)
+			{
+				pantsAndShirt.children[i].visible = true;
+				console.log("setting visible");
+			}
+			dress.visible = false;
+			doll.visible = true;
+
+			shirt.fillColor = new Color(Math.random(), Math.random(), Math.random());
+			pants.fillColor = new Color(Math.random(), Math.random(), Math.random());
+		}
+		else
+		{
+			activeOutfit = dress;
+
+			doll.visible = false;
+			activeOutfit = dress;
+			dress.visible = true;
+			shirt.visible = false;
+			pants.visible = false;
+			doll.visible = true;
+
+			activeOutfit.fillColor = new Color(Math.random(), Math.random(), Math.random());
+		}
+
+		var pattern = patternGroup.removeChildren(1); //starting at 1
+		patternGroup.removeChildren(); //remove all
+		patternGroup = new Group(activeOutfit.clone());
+		patternGroup.addChildren(pattern);
+		patternGroup.clipped = true;
+
+		paper.view.draw();
+	}
+
 	this.hideAllExceptOutfit = function hideAllExceptOutfit() {
 
-		for(var i=0;i<project.activeLayer.children.length;i++) {
-			project.activeLayer.children[i].visible = false;
+		for(var i=0;i<backgroundThings.children.length;i++) {
+			backgroundThings.children[i].visible = false;
 		}
+
 		activeOutfit.visible = true;
 		patternGroup.visible = true;
+		doll.visible = false;
+		active_hair.visible = false;
+
+		cursorX.visible = false;
+		cursorY.visible = false;
+
+		paper.view.draw();
+	}
+
+	this.hideAllExceptDollAndOutfit = function hideAllExceptDollAndOutfit() {
+
+		for(var i=0;i<backgroundThings.children.length;i++) {
+			backgroundThings.children[i].visible = false;
+		}
+
+		activeOutfit.visible = true;
+		patternGroup.visible = true;
+
+		cursorX.visible = false;
+		cursorY.visible = false;
 
 		paper.view.draw();
 	}
 
 	this.showItAgain = function showItAgain() {
-		for(var i=0;i<project.activeLayer.children.length;i++) {
-			project.activeLayer.children[i].visible = true;
+		for(var i=0;i<backgroundThings.children.length;i++) {
+			backgroundThings.children[i].visible = true;
 		}
+
+		activeOutfit.visible = true;
+		patternGroup.visible = true;
+
+		cursorX.visible = true;
+		cursorY.visible = true;
+
+		doll.visible = true;
+		active_hair.visible = true;
 
 		paper.view.draw();
 	}
 
+	this.updateCursors = function updateCursors() {
+
+		if(xPos > 90) {
+			xPos = 90;
+		}
+		if(xPos < 0) {
+			xPos = 0;
+		}
+		if(yPos > 150) {
+			yPos = 150;
+		}
+		if(yPos < 0) {
+			yPos = 0;
+		}
+
+		//vertical
+		cursorX.position.x = rulerWidth + toPaperCoordsX(xPos);
+		//horizontal
+		cursorY.position.x = rulerWidth + toPaperCoordsX(xPos) - cursorY.length/2;
+
+		//vertical
+		cursorX.position.y = toPaperCoordsY(yPos) + cursorX.length/2;
+		//horizontal
+		cursorY.position.y = toPaperCoordsY(yPos);
+
+		paper.view.draw();
+	}
+
+	this.goToXY = function goToXY(x, y) {
+		xPos = x;
+		yPos = y;
+		this.updateCursors();
+	}
+
+	this.goToLocation = function goToLocation(location) {
+		//eeep, put this into a data structure asap
+		if(location === "LEFT_SHOULDER") {
+			xPos = 34;
+			yPos = 106;
+			this.updateCursors();
+		}
+		else if(location === "RIGHT_SHOULDER") {
+			xPos = 53;
+			yPos = 106;
+			this.updateCursors();
+		}
+		else if(location === "WAIST") {
+
+		}
+		else if(location === "KNEES") {
+
+		}
+		else if(location === "LEFT_TOE") {
+
+		}
+		else if(location === "RIGHT_TOE") {
+
+		}
+	}
+
+	this.clearPattern = function clearPattern() {
+		patternGroup.removeChildren();
+		patternGroup = new Group(activeOutfit.clone());
+		patternGroup.clipped = true;
+	}
+
 	var backgroundRect = new Rectangle(new Point(rulerWidth, 0), new Point(w+rulerWidth, h+rulerWidth));
 	var background = new Path.Rectangle(backgroundRect);
-	background.fillColor = '#ffffff';
+	backgroundThings.addChild(background);
+	background.fillColor = '#dddddd';
 
 	//vertical ruler
 	var rulerRectY = new Rectangle(new Point(0, 0), new Point(rulerWidth, h));
 	var rulerY = new Path.Rectangle(rulerRectY);
 	rulerY.fillColor = '#F7E048';
+	backgroundThings.addChild(rulerY);
 
 	//horizontal ruler
 	var rulerRectX = new Rectangle(new Point(rulerWidth, h), new Point(w+rulerWidth, h+rulerWidth));
 	var rulerX = new Path.Rectangle(rulerRectX);
 	rulerX.fillColor = '#F7E048';
+	backgroundThings.addChild(rulerX);
 
 	//markings on vertical ruler
 	var label = numMarkings;
 	for(var i=0;i<h-markingWidth;i+=markingWidth*10)
 	{
 		var marking = new Path.Line(new Point(rulerWidth/2, i), new Point(rulerWidth, i));
+		backgroundThings.addChild(marking);
 		marking.strokeColor = 'black';
 		if(i > 0) {
 			var text = new PointText(new Point(rulerWidth/4, i+4));
+			backgroundThings.addChild(text);
 			text.justification = 'center';
 			text.fillColor = 'black';
 			text.content = label;
@@ -342,12 +606,15 @@
 		{
 			var smallMarking = new Path.Line(new Point(2*rulerWidth/3, i+j*markingWidth), new Point(rulerWidth, i+j*markingWidth));
 			smallMarking.strokeColor = 'black';
+			backgroundThings.addChild(smallMarking);
 		}
 		label -= 10;
 	}
 	var marking = new Path.Line(new Point(rulerWidth/2, h), new Point(rulerWidth, h));
+	backgroundThings.addChild(marking);
 	marking.strokeColor = 'black';
 	var text = new PointText(new Point(rulerWidth/4, h+4));
+	backgroundThings.addChild(text);
 	text.justification = 'center';
 	text.fillColor = 'black';
 	text.content = 0;
@@ -357,67 +624,101 @@
 	for(var i=rulerWidth;i<w+rulerWidth-markingWidth;i+=markingWidth*10)
 	{
 		var marking = new Path.Line(new Point(i, h), new Point(i, h+rulerWidth/2));
+		backgroundThings.addChild(marking);
 		marking.strokeColor = 'black';
 		var text = new PointText(new Point(i, h+3*rulerWidth/4));
+		backgroundThings.addChild(text);
 		text.justification = 'center';
 		text.fillColor = 'black';
 		text.content = label;
 		for(var j=0;j<10;j++)
 		{
 			var smallMarking = new Path.Line(new Point(i+j*markingWidth, h), new Point(i+j*markingWidth, h+rulerWidth/3));
+			backgroundThings.addChild(smallMarking);
 			smallMarking.strokeColor = 'black';
 		}
 		label+=10;
 	}
-	//var marking = new Path.Line(new Point(w+rulerWidth, h), new Point(w+rulerWidth, h+rulerWidth/2));
-	//marking.strokeColor = 'black';
 
+
+//call stack paiiiiin, figure out how to do this better!
 	project.importSVG('assets/doll.svg', {
         expandShapes: true,
         onLoad: function(item) {
-        	item.position.x = view.center.x+rulerWidth/2;
+        	doll = item;
+        	doll.visible = false; //let's not have any wardrobe malfunctions
+        	doll.position.x = view.center.x+rulerWidth/2;
             console.log("doll loaded");
 
             project.importSVG('assets/hair in bun.svg', {
        		 	expandShapes: true,
         		onLoad: function(item) {
+        		bun_hair = item;
+        		active_hair = bun_hair;
     			item.position.x = view.center.x+rulerWidth/2+1;
     			project.importSVG('assets/no sleeve dress.svg', {
 		expandShapes: true,
 		onLoad: function(item) {
 			activeOutfit = item;
+			dress = item;
+			activeOutfit.fillColor = new Color(Math.random(), Math.random(), Math.random());
 			activeOutfit.position.x = view.center.x+rulerWidth/2;
 			patternGroup = new Group(activeOutfit.clone());
 			patternGroup.clipped = true;
-
-			/*var star = new Path.Star({
-				center: view.center,
-				points: 6,
-				radius1: 20,
-				radius2: 40,
-				fillColor: 'red'
-			});
-			patternGroup.addChild(star);*/
-
-			//set up cursors to show current x, y position
-
-			cursor = new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos));
-
-			//horizontal
-			cursorY = new Path.Line(new Point(-1*w, toPaperCoordsY(yPos)), cursor);
-			//cursorY = new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), cursor);
-			cursorY.strokeColor = '#7C7C7D';
-			cursorY.dashArray = [6, 4];
-
-			//vertical
-			cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), 2*h), cursor);
-			//cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), h), cursor);
-			cursorX.strokeColor = '#7C7C7D';
-			cursorX.dashArray = [6, 4];
+			doll.visible = true; //ok we're clothed, we can come out now
 		}
 	});
 			}
     		});
+
+
+	project.importSVG('assets/wide pants.svg', {
+        expandShapes: true,
+        onLoad: function(item) {
+        	pants = item;
+        	item.visible = false;
+        	item.position.x = view.center.x+rulerWidth/2;
+
+        	project.importSVG('assets/tshirt.svg', {
+        		expandShapes: true,
+        		onLoad: function(item) {
+        			shirt = item;
+        			shirt.visible = false;
+        			shirt.position.x = view.center.x+rulerWidth/2;
+					pantsAndShirt = new Group();
+					pantsAndShirt.addChild(pants);
+					pantsAndShirt.addChild(shirt);
+
+					console.log("we have pants!");
+
+					//set up cursors to show current x, y position
+
+					cursor = new Point(rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos));
+
+					//horizontal
+					cursorY = new Path.Line(new Point(-1*w, toPaperCoordsY(yPos)), cursor);
+					cursorY.strokeColor = '#000000';
+					cursorY.dashArray = [6, 4];
+
+					//vertical
+					cursorX = new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), 2*h), cursor);
+					cursorX.strokeColor = '#000000';
+					cursorX.dashArray = [6, 4];
+
+					project.importSVG('assets/messy short hair.svg', {
+        				expandShapes: true,
+        				onLoad: function(item) {
+        					short_hair = item;
+        					item.visible = false;
+        					short_hair.fillColor = new Color(Math.random(0, 255), Math.random(0, 255), Math.random(0, 255));
+        					item.position.x = view.center.x+rulerWidth/2;
+        }
+	});
+        }
+	});
+        }
+	});
+
         }
     });
 
@@ -435,6 +736,8 @@
 		path.moveTo(start);
 
 		path.lineTo(start.add([w, 0]));
+
+		path.rotate(360-angle);
 
 		patternGroup.addChild(path);
 
@@ -472,7 +775,16 @@
 		}
 		else if(shape === 'DIAMOND')
 		{
-
+			var star = new Path.Star({
+				center: [rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos)],
+				points: 4,
+				radius1: toPaperCoordsX(penSize/1.5),
+				radius2: toPaperCoordsX(penSize),
+				fillColor: penColor
+			});
+			star.rotate(45);
+			star.scale(1, 2);
+			patternGroup.addChild(star);
 
 		}
 		else if(shape === 'HEART')
@@ -482,38 +794,41 @@
 		}
 		else if(shape === 'TRIANGLE')
 		{
-
+			var star = new Path.Star({
+				center: [rulerWidth+toPaperCoordsX(xPos), toPaperCoordsY(yPos)],
+				points: 3,
+				radius1: toPaperCoordsX(penSize/2),
+				radius2: toPaperCoordsX(penSize),
+				fillColor: penColor
+			});
+			star.rotate(180);
+			patternGroup.addChild(star);
 
 		}
 		paper.view.draw();
 	}
 
-	this.updateCursors = function updateCursors()
-	{
-		cursor.x = rulerWidth + toPaperCoordsX(xPos);
-		cursor.y = toPaperCoordsY(yPos);
 
-		//cursorY.replaceWith(new Path.Line(new Point(rulerWidth, toPaperCoordsY(yPos)), cursor));
-		//cursorX.replaceWith(new Path.Line(new Point(rulerWidth+toPaperCoordsX(xPos), h), cursor));
-
-		paper.view.draw();
-	}
 
 	this.moveDown = function moveDown(spaces) {
 		yPos -= spaces;
-		console.log('yPos: ' + yPos);
-		console.log("paper yPos: " + toPaperCoordsY(yPos));
-		cursorY.position.y += toPaperCoordsX(spaces);
-		cursorX.position.y += toPaperCoordsX(spaces);
-		paper.view.draw();
+		this.updateCursors();
+
+		//console.log('yPos: ' + yPos);
+		//console.log("paper yPos: " + toPaperCoordsY(yPos));
+		//cursorY.position.y += toPaperCoordsX(spaces);
+		//cursorX.position.y += toPaperCoordsX(spaces);
+		//paper.view.draw();
 	}
 
 	this.moveRight = function moveRight(spaces) {
 		xPos += spaces;
-		console.log('xPos: ' + xPos);
-		cursorX.position.x += toPaperCoordsX(spaces);
-		cursorY.position.x += toPaperCoordsX(spaces);
-		paper.view.draw();
+		this.updateCursors();
+
+		//console.log('xPos: ' + xPos);
+		//cursorX.position.x += toPaperCoordsX(spaces);
+		//cursorY.position.x += toPaperCoordsX(spaces);
+		//paper.view.draw();
 	}
 
 

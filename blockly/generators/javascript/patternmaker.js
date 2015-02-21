@@ -15,8 +15,7 @@ Blockly.JavaScript['patternmaker_stripe'] = function(block) {
 };
 
 Blockly.JavaScript['patternmaker_start'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
+  var code = Blockly.JavaScript.statementToCode(block, 'DO');
   return code;
 };
 
@@ -45,16 +44,16 @@ Blockly.JavaScript['patternmaker_move_right'] = function(block) {
 };
 
 
-Blockly.JavaScript['patternmaker_setx'] = function(block) {
+Blockly.JavaScript['patternmaker_setxy'] = function(block) {
   var value_x = Blockly.JavaScript.valueToCode(block, 'X', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'setX(' + value_x + ');';
+  var value_y = Blockly.JavaScript.valueToCode(block, 'Y', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'goToXY(' + value_x + ', ' + value_y + ');';
   return code;
 };
 
-
-Blockly.JavaScript['patternmaker_sety'] = function(block) {
-  var value_y = Blockly.JavaScript.valueToCode(block, 'Y', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'setY(' + value_y + ');';
+Blockly.JavaScript['patternmaker_goTo'] = function(block) {
+  var dropdown_location = block.getFieldValue('LOCATION');
+  var code = "goToLocation(" + "\'" + dropdown_location + "\');";
   return code;
 };
 
@@ -65,9 +64,6 @@ Blockly.JavaScript['patternmaker_clear'] = function(block) {
 
 Blockly.JavaScript['patternmaker_draw_shape'] = function(block) {
   var dropdown_shape = block.getFieldValue('SHAPE');
-  var value_width = Blockly.JavaScript.valueToCode(block, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_height = Blockly.JavaScript.valueToCode(block, 'HEIGHT', Blockly.JavaScript.ORDER_ATOMIC);
-  var colour_color = block.getFieldValue('COLOR');
   var code = "drawShape(" + "\'" + dropdown_shape + "\');";
   return code;
 };

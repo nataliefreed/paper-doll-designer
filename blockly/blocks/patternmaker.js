@@ -26,11 +26,13 @@ Blockly.Blocks['patternmaker_stripe'] = {
 Blockly.Blocks['patternmaker_start'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(43);
+    this.setColour(197);
     this.appendDummyInput()
-        .appendField("start");
+        .appendField("when run code clicked");
+    this.appendStatementInput('DO')
+        .appendField('do');
     this.setInputsInline(true);
-    this.setNextStatement(true);
+    this.setNextStatement(false);
     this.setTooltip('');
   }
 };
@@ -100,13 +102,16 @@ Blockly.Blocks['patternmaker_move_right'] = {
 };
 
 //https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#insmq3
-Blockly.Blocks['patternmaker_setx'] = {
+Blockly.Blocks['patternmaker_setxy'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(225);
     this.appendValueInput("X")
         .setCheck("Number")
-        .appendField("set x to");
+        .appendField("set x: ");
+    this.appendValueInput("Y")
+        .setCheck("Number")
+        .appendField(" y: ");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -114,13 +119,15 @@ Blockly.Blocks['patternmaker_setx'] = {
   }
 };
 
-Blockly.Blocks['patternmaker_sety'] = {
+//https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#bke78f
+Blockly.Blocks['patternmaker_goTo'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(225);
-    this.appendValueInput("Y")
-        .setCheck("Number")
-        .appendField("set y to");
+    this.appendDummyInput()
+        .appendField("go to")
+        .appendField(new Blockly.FieldDropdown([["left shoulder", "LEFT_SHOULDER"], ["right shoulder", "RIGHT_SHOULDER"]]), "LOCATION");
+            //.appendField(new Blockly.FieldDropdown([["left shoulder", "LEFT_SHOULDER"], ["right shoulder", "RIGHT_SHOULDER"], ["waist", "WAIST"], ["knees", "KNEES"], ["left toe", "LEFT_TOE"], ["right toe", "RIGHT_TOE"]]), "LOCATION");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -148,7 +155,8 @@ Blockly.Blocks['patternmaker_draw_shape'] = {
     this.setColour(160);
     this.appendDummyInput()
         .appendField("draw")
-        .appendField(new Blockly.FieldDropdown([["star", "STAR"], ["rectangle", "RECTANGLE"], ["circle", "CIRCLE"], ["diamond", "DIAMOND"], ["heart", "HEART"], ["triangle", "TRIANGLE"]]), "SHAPE");
+        .appendField(new Blockly.FieldDropdown([["star", "STAR"], ["circle", "CIRCLE"], ["diamond", "DIAMOND"], ["triangle", "TRIANGLE"]]), "SHAPE");
+        //.appendField(new Blockly.FieldDropdown([["star", "STAR"], ["rectangle", "RECTANGLE"], ["circle", "CIRCLE"], ["diamond", "DIAMOND"], ["heart", "HEART"], ["triangle", "TRIANGLE"]]), "SHAPE");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

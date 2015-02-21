@@ -5,6 +5,8 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/blockly/i18n/status.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/blockly/i18n/status.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blockly/blocks/patternmaker.js" afterPath="$PROJECT_DIR$/blockly/blocks/patternmaker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blockly/generators/javascript/patternmaker.js" afterPath="$PROJECT_DIR$/blockly/generators/javascript/patternmaker.js" />
     </list>
     <ignored path="paper-doll-designer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,9 +33,11 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.7380953" vertical-offset="4200" max-vertical-offset="8010">
-              <caret line="395" column="26" selection-start-line="395" selection-start-column="26" selection-end-line="395" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.43137255" vertical-offset="5241" max-vertical-offset="12735">
+              <caret line="367" column="14" selection-start-line="367" selection-start-column="14" selection-end-line="367" selection-end-column="14" />
               <folding>
+                <element signature="n#style#0;n#xml#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#xml#1;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -115,7 +119,36 @@
     <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RunManager" selected="JavaScript Debug.paper doll designer">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <method />
     </configuration>
     <configuration default="false" name="paper doll designer" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63342/paper-doll-designer/index.html">
@@ -184,9 +217,11 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.7380953" vertical-offset="4200" max-vertical-offset="8010">
-          <caret line="395" column="26" selection-start-line="395" selection-start-column="26" selection-end-line="395" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.43137255" vertical-offset="5241" max-vertical-offset="12735">
+          <caret line="367" column="14" selection-start-line="367" selection-start-column="14" selection-end-line="367" selection-end-column="14" />
           <folding>
+            <element signature="n#style#0;n#xml#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#xml#1;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
