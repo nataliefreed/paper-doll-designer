@@ -4,9 +4,6 @@
     <list default="true" id="a0bf5b9e-7649-4a3e-85b2-b5bc3ded3205" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/blockly/i18n/status.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/blockly/i18n/status.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blockly/blocks/patternmaker.js" afterPath="$PROJECT_DIR$/blockly/blocks/patternmaker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blockly/generators/javascript/patternmaker.js" afterPath="$PROJECT_DIR$/blockly/generators/javascript/patternmaker.js" />
     </list>
     <ignored path="paper-doll-designer.iws" />
     <ignored path=".idea/workspace.xml" />
