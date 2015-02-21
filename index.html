@@ -144,21 +144,21 @@
 
 					<block type="math_number"></block>
 					<block type="math_arithmetic"></block>
-					<!--<block type="variables_get"></block>-->
-					<!--<block type="variables_set">-->
-						<!--<value name="VALUE">-->
-							<!--<block type="math_number">-->
-								<!--<field name="NUM">0</field>-->
-							<!--</block>-->
-						<!--</value>-->
-					<!--</block>-->
-					<!--<block type="math_change">-->
-						<!--<value name="DELTA">-->
-							<!--<block type="math_number">-->
-								<!--<field name="NUM">1</field>-->
-							<!--</block>-->
-						<!--</value>-->
-					<!--</block>-->
+					<block type="variables_get"></block>
+					<block type="variables_set">
+						<value name="VALUE">
+							<block type="math_number">
+								<field name="NUM">0</field>
+							</block>
+						</value>
+					</block>
+					<block type="math_change">
+						<value name="DELTA">
+							<block type="math_number">
+								<field name="NUM">1</field>
+							</block>
+						</value>
+					</block>
 
 
 					<!--<block type="logic_compare"></block>-->
@@ -247,7 +247,7 @@
 
 	function runCode() {
 		Blockly.JavaScript.addReservedWords('code');
-		//var code = Blockly.JavaScript.workspaceToCode();
+		Blockly.JavaScript.workspaceToCode();
 		var code = getCodeInStartBlock();
 		try {
 			eval(code);

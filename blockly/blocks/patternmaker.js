@@ -29,7 +29,7 @@ Blockly.Blocks['patternmaker_start'] = {
     this.setColour(197);
     this.appendDummyInput()
         .appendField("when run code clicked");
-    this.appendStatementInput('DO')
+    this.appendStatementInput('RUN')
         .appendField('do');
     this.setInputsInline(true);
     this.setNextStatement(false);

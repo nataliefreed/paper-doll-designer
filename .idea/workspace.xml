@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0bf5b9e-7649-4a3e-85b2-b5bc3ded3205" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/blockly/i18n/status.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/blockly/i18n/status.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blockly/blocks/patternmaker.js" afterPath="$PROJECT_DIR$/blockly/blocks/patternmaker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blockly/generators/javascript/patternmaker.js" afterPath="$PROJECT_DIR$/blockly/generators/javascript/patternmaker.js" />
     </list>
     <ignored path="paper-doll-designer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +31,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43137255" vertical-offset="5241" max-vertical-offset="12735">
-              <caret line="367" column="14" selection-start-line="367" selection-start-column="14" selection-end-line="367" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.5294118" vertical-offset="10101" max-vertical-offset="12735">
+              <caret line="695" column="33" selection-start-line="695" selection-start-column="33" selection-end-line="695" selection-end-column="33" />
               <folding>
                 <element signature="n#style#0;n#xml#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#xml#1;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -214,8 +215,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43137255" vertical-offset="5241" max-vertical-offset="12735">
-          <caret line="367" column="14" selection-start-line="367" selection-start-column="14" selection-end-line="367" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.5294118" vertical-offset="10101" max-vertical-offset="12735">
+          <caret line="695" column="33" selection-start-line="695" selection-start-column="33" selection-end-line="695" selection-end-column="33" />
           <folding>
             <element signature="n#style#0;n#xml#0;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#xml#1;n#div#2;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />

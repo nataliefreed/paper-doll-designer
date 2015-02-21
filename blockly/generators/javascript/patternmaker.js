@@ -15,8 +15,8 @@ Blockly.JavaScript['patternmaker_stripe'] = function(block) {
 };
 
 Blockly.JavaScript['patternmaker_start'] = function(block) {
-  var code = Blockly.JavaScript.statementToCode(block, 'DO');
-  return code;
+  var theCode = Blockly.JavaScript.statementToCode(block, 'RUN');
+  return theCode;
 };
 
 Blockly.JavaScript['patternmaker_pen_color'] = function(block) {
