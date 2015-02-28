@@ -22,15 +22,34 @@ Blockly.Blocks['patternmaker_stripe'] = {
   }
 };
 
-//https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ok4yyt
+Blockly.Blocks['patternmaker_repeatAcross'] = {
+    init: function() {
+        this.setHelpUrl('http://www.example.com/');
+        this.setColour(43);
+        this.appendDummyInput()
+            .appendField("Repeat")
+            .appendField(new Blockly.FieldDropdown([["down", "DOWN"], ["up", "UP"], ["right", "RIGHT"], ["left", "LEFT"]]), "DIRECTION");
+        this.appendValueInput("TIMES")
+            .setCheck("Number")
+            .appendField("how many times:");
+        this.appendValueInput("SPACING")
+            .setCheck("Number")
+            .appendField("space in between:");
+        this.appendStatementInput('RUN');
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip('');
+    }
+};
+
 Blockly.Blocks['patternmaker_start'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(197);
     this.appendDummyInput()
-        .appendField("when run code clicked");
-    this.appendStatementInput('RUN')
-        .appendField('do');
+        .appendField("when Run Code clicked:");
+    this.appendStatementInput('RUN');
     this.setInputsInline(true);
     this.setNextStatement(false);
     this.setTooltip('');
@@ -42,9 +61,9 @@ Blockly.Blocks['patternmaker_pen_color'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(160);
-    this.appendDummyInput()
-        .appendField("set pen color to")
-        .appendField(new Blockly.FieldColour("#009900"), "PEN_COLOR");
+    this.appendValueInput("PEN_COLOR")
+        .appendField("set pen color to");
+        //.appendField(new Blockly.FieldColour("#009900"), "PEN_COLOR");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -69,29 +88,15 @@ Blockly.Blocks['patternmaker_pen_size'] = {
 };
 
 //https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#nnbxts
-Blockly.Blocks['patternmaker_move_down'] = {
+Blockly.Blocks['patternmaker_move_direction'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(225);
-    this.appendValueInput("MOVE_DOWN")
-        .setCheck("Number")
-        .appendField("move down");
     this.appendDummyInput()
-        .appendField("spaces");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};
-
-Blockly.Blocks['patternmaker_move_right'] = {
-  init: function() {
-    this.setHelpUrl('http://www.example.com/');
-    this.setColour(225);
-    this.appendValueInput("MOVE_RIGHT")
-        .setCheck("Number")
-        .appendField("move right");
+        .appendField("Move")
+        .appendField(new Blockly.FieldDropdown([["down", "DOWN"], ["right", "RIGHT"], ["up", "UP"], ["left", "LEFT"]]), "DIRECTION");
+    this.appendValueInput("STEPS")
+        .setCheck("Number");
     this.appendDummyInput()
         .appendField("spaces");
     this.setInputsInline(true);

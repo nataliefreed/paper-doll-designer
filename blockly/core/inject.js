@@ -295,7 +295,7 @@ Blockly.createDom_ = function(container) {
       var workspaceChanged = function() {
         if (Blockly.dragMode_ == 0) {
           var metrics = Blockly.mainWorkspace.getMetrics();
-          var edgeLeft = metrics.viewLeft + metrics.absoluteLeft;
+          var edgeLeft = metrics.viewLeft + metrics.absoluteLeft + 100;
           var edgeTop = metrics.viewTop + metrics.absoluteTop;
           if (metrics.contentTop < edgeTop ||
               metrics.contentTop + metrics.contentHeight >

@@ -75,7 +75,7 @@ Blockly.WorkspaceSvg.prototype.dragMode = false;
  * Current horizontal scrolling offset.
  * @type {number}
  */
-Blockly.WorkspaceSvg.prototype.scrollX = 0;
+Blockly.WorkspaceSvg.prototype.scrollX = 0; 
 
 /**
  * Current vertical scrolling offset.

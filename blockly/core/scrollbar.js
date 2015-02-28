@@ -39,7 +39,7 @@ goog.require('goog.events');
 Blockly.ScrollbarPair = function(workspace) {
   this.workspace_ = workspace;
   this.oldHostMetrics_ = null;
-  this.hScroll = new Blockly.Scrollbar(workspace, true, true);
+  //this.hScroll = new Blockly.Scrollbar(workspace, true, true);
   this.vScroll = new Blockly.Scrollbar(workspace, false, true);
   this.corner_ = Blockly.createSvgElement('rect',
       {'height': Blockly.Scrollbar.scrollbarThickness,
@@ -104,7 +104,7 @@ Blockly.ScrollbarPair.prototype.resize = function() {
     }
   }
   if (resizeH) {
-    this.hScroll.resize(hostMetrics);
+    //this.hScroll.resize(hostMetrics);
   }
   if (resizeV) {
     this.vScroll.resize(hostMetrics);
@@ -119,7 +119,7 @@ Blockly.ScrollbarPair.prototype.resize = function() {
   if (!this.oldHostMetrics_ ||
       this.oldHostMetrics_.viewHeight != hostMetrics.viewHeight ||
       this.oldHostMetrics_.absoluteTop != hostMetrics.absoluteTop) {
-    this.corner_.setAttribute('y', this.hScroll.yCoordinate);
+    //this.corner_.setAttribute('y', this.hScroll.yCoordinate);
   }
 
   // Cache the current metrics to potentially short-cut the next resize event.
@@ -132,7 +132,7 @@ Blockly.ScrollbarPair.prototype.resize = function() {
  * @param {number} y Vertical scroll value.
  */
 Blockly.ScrollbarPair.prototype.set = function(x, y) {
-  this.hScroll.set(x);
+  //this.hScroll.set(x);
   this.vScroll.set(y);
 };
 

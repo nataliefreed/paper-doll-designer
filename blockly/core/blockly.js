@@ -679,6 +679,7 @@ Blockly.getMainWorkspaceMetrics_ = function() {
   if (!Blockly.RTL && Blockly.mainWorkspace.toolbox_) {
     absoluteLeft = Blockly.mainWorkspace.toolbox_.width;
   }
+ 
   var metrics = {
     viewHeight: svgSize.height,
     viewWidth: svgSize.width,
