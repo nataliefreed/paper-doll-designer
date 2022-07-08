@@ -449,6 +449,8 @@
 	var shirt;
 	var pants;
 
+	var starting_skin_tone = '#7B4B2A';
+
 	var active_hair;
 	var short_hair;
 	var bun_hair;
@@ -756,6 +758,7 @@
 					doll = item;
 					doll.visible = false; //let's not have any wardrobe malfunctions
 					doll.position.x = view.center.x+rulerWidth/2;
+					doll.fillColor = starting_skin_tone;
 					console.log("doll loaded");
 
 					project.importSVG('assets/tshirt.svg', {
